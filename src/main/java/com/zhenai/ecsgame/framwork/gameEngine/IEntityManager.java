@@ -1,27 +1,19 @@
 package com.zhenai.ecsgame.framwork.gameEngine;
 
+import com.zhenai.ecsgame.framwork.component.ICompontent;
 import com.zhenai.ecsgame.framwork.entity.IEntity;
 
 import java.util.Collection;
-import java.util.Observer;
 
+
+/**
+ * 实体管理类
+ */
 public interface IEntityManager {
 
-     void callAddEntity(IEntity entity);
+    <T extends IEntity> void onCreatEntity(T entity);
 
+    <T extends IEntity> void onRemoveEntity(T entity);
 
-     void callremoveEntity(IEntity entity);
-     /**
-      * 注册观察者
-      * @param arr
-      * @param sub
-      */
-     void registerListener(Collection<Class<? extends IEntity>> arr, Observer sub);
-
-     /**
-      * 注册观察者
-      * @param entityClass
-      * @param sub
-      */
-     void registerListener(Class<? extends IEntity> entityClass, Observer sub);
+    Collection<IEntity> getFilterEntity(Collection<Class<? extends ICompontent>> clzs);
 }

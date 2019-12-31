@@ -1,9 +1,9 @@
 package com.zhenai.ecsgame.framwork.system;
 
+import com.zhenai.ecsgame.framwork.component.ICompontent;
 import com.zhenai.ecsgame.framwork.entity.IEntity;
 import com.zhenai.ecsgame.framwork.gameEngine.EntityManager;
 import com.zhenai.ecsgame.framwork.gameEngine.GameDriver;
-import com.zhenai.ecsgame.framwork.gameEngine.NotifyBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 
@@ -15,19 +15,14 @@ import java.util.*;
  * @Date: 2019/12/30/10:18
  * @Description:
  */
-@DependsOn(value = "entityManagerIml")
 public abstract class AbstractSystemImpl implements ISystem {
 
 
     @Autowired
-    private EntityManager entityManagerIml;
+    private EntityManager entityManager;
 
     @Autowired
     private GameDriver gameDriver;
-
-
-    Collection<IEntity> entities = new HashSet<>();
-    private GameState state = GameState.STATE_START;
 
 
     public AbstractSystemImpl() {
@@ -36,41 +31,25 @@ public abstract class AbstractSystemImpl implements ISystem {
 
     @PostConstruct
     public  void init(){
-        register(getRegisters());
         gameDriver.addObj(this);
-
     }
 
-    public abstract Collection<Class<? extends IEntity>> getRegisters();
+    public abstract Collection<Class<? extends ICompontent>> interestCompontent();
+
+    @Override
+    public Collection<? extends IEntity> getEntities(){
+        Collection<Class<? extends ICompontent>> compontentClzs =  interestCompontent();
+        if (compontentClzs!=null&& compontentClzs.size()>0){
+            return entityManager.getFilterEntity(compontentClzs);
+        }else {
+            return new ArrayList<>();
+        }
+    }
 
     @Override
     public abstract void GameUpdate();
 
-    @Override
-    public void update(Observable o, Object arg) {
-        if (arg instanceof NotifyBean) {
-            NotifyBean notifyBean = (NotifyBean) arg;
-            if (notifyBean.getOpt() == NotifyBean.Opt.Notify_Add) {
-                entities.add(notifyBean.getEntity());
-            } else if (notifyBean.getOpt() == NotifyBean.Opt.Notify_Remove) {
-                entities.remove(notifyBean.getEntity());
-            }
-        }
-    }
 
-    private void register(Collection<Class<? extends IEntity>> arr) {
-        if (arr != null) {
-            for (Class entityClass : arr) {
-                register(entityClass);
-            }
-        }
-    }
-
-    public void register(Class<? extends IEntity> entityClass) {
-        if (entityClass != null) {
-            entityManagerIml.registerListener(entityClass, this);
-        }
-    }
 
     /**
      * system 得全程保持，不能结束
@@ -79,16 +58,19 @@ public abstract class AbstractSystemImpl implements ISystem {
     @Override
     public final void destory() throws Exception {
         throw new Exception();
-//        setGameState(GameState.);
     }
 
     @Override
     public GameState getGameState() {
-        return state;
+        return GameState.STATE_ING;
     }
 
+    /**
+     * system 不能改变state
+     * @throws Exception
+     */
     @Override
-    public void setGameState(GameState state) {
-        this.state = state;
+    public void setGameState(GameState state) throws Exception {
+        throw new Exception();
     }
 }

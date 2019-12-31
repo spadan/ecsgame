@@ -34,5 +34,5 @@ public interface IGameObject {
      * 设置游戏状态
      * @param state
      */
-    void setGameState(GameState state);
+    void setGameState(GameState state) throws Exception;
 }
