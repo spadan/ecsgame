@@ -1,14 +1,11 @@
 package com.zhenai.ecsgame.Manager;
 
-import com.zhenai.ecsgame.ApplicationListenerCompontent;
 import com.zhenai.ecsgame.compontent.MoveCompontent;
 import com.zhenai.ecsgame.compontent.PositionCompontent;
 import com.zhenai.ecsgame.entity.RobotEntity;
 import com.zhenai.ecsgame.framwork.gameEngine.AbstractGameObject;
 import com.zhenai.ecsgame.framwork.gameEngine.bean.Vector2D;
-import org.springframework.context.annotation.DependsOn;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,14 +27,11 @@ public class RobotManager extends AbstractGameObject {
     @Override
     public void GameUpdate() {
 
-
-
         updateTime++;
         addNewRobot();
         addRobotAnimationTime();
 
-
-        if (updateTime%10==0){
+        if (updateTime%100==0){
             printPosition(robotEntities);
         }
 

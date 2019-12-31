@@ -1,12 +1,12 @@
 package com.zhenai.ecsgame;
 
 
-import org.springframework.web.bind.annotation.*;
+//import org.springframework.web.bind.annotation.*;
 
-@RestController
+//@RestController
 public class main {
 
-    @GetMapping("/hello")
+//    @GetMapping("/hello")
     public Object getHelloWorld(){
         return "getHelloWorld";
     }
