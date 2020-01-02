@@ -12,15 +12,10 @@ import com.zhenai.ecsgame.framwork.gameEngine.bean.Vector2D;
  */
 public class RobotEntity extends AbstractEntity {
 
-
     public RobotEntity(){
         super();
-        MoveCompontent moveCompontent = new MoveCompontent(this);
-        moveCompontent.setMoveSpeed(1.0d);
-        moveCompontent.setVector(new Vector2D(1,1));
-        moveCompontent.setAnimationTime(100);
-        addCompontent(moveCompontent);
-        addCompontent(new PositionCompontent(this));
+        MoveCompontent moveCompontent = new MoveCompontent(this,100,new Vector2D(1,1),1.0d);
+        addCompontent(moveCompontent).addCompontent(new PositionCompontent(this));
     }
 
     public void setSpeed(double speed){

@@ -17,7 +17,7 @@ public interface IEntity {
 
     ICompontent getCompontent(String clzName);
 
-    <T extends ICompontent> void addCompontent(T t);
+    <T extends ICompontent> IEntity addCompontent(T t);
 
     void removeCompontent(Class<? extends ICompontent> clz);
 

@@ -46,8 +46,9 @@ public abstract class AbstractEntity implements IEntity {
     }
 
     @Override
-    public <T extends ICompontent> void addCompontent(T t) {
+    public <T extends ICompontent> IEntity addCompontent(T t) {
         compontentMap.put(t.getClass().getName(),t);
+        return this;
     }
 
 

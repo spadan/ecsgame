@@ -22,7 +22,7 @@ public class EcsgameApplication {
     private static void initManager(){
         new RobotManager();
         NettyServer nettyServer = new NettyServer();
-        nettyServer.start(new InetSocketAddress("localhost",8080));
+        nettyServer.start(new InetSocketAddress("localhost",8081));
     }
 
 
