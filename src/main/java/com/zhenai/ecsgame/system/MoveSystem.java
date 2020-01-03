@@ -1,8 +1,8 @@
 package com.zhenai.ecsgame.system;
 
-import com.zhenai.ecsgame.compontent.MoveCompontent;
-import com.zhenai.ecsgame.compontent.PositionCompontent;
-import com.zhenai.ecsgame.framwork.component.ICompontent;
+import com.zhenai.ecsgame.component.MoveComponent;
+import com.zhenai.ecsgame.component.PositionComponent;
+import com.zhenai.ecsgame.framwork.component.IComponent;
 import com.zhenai.ecsgame.framwork.entity.IEntity;
 import com.zhenai.ecsgame.framwork.gameEngine.util.EngineUtils;
 import com.zhenai.ecsgame.framwork.gameEngine.bean.Position;
@@ -29,8 +29,8 @@ public class MoveSystem extends AbstractSystemImpl {
 
 
     @Override
-    public Collection<Class<? extends ICompontent>> interestCompontent() {
-        return Arrays.asList(PositionCompontent.class, MoveCompontent.class);
+    public Collection<Class<? extends IComponent>> interestCompontent() {
+        return Arrays.asList(PositionComponent.class, MoveComponent.class);
     }
 
     @Override
@@ -39,28 +39,23 @@ public class MoveSystem extends AbstractSystemImpl {
         entities.forEach(e->move(e));
     }
 
-    private void printPosition(Collection<IEntity> collections){
-        collections.forEach(e-> {
-            PositionCompontent compontent =  e.getCompontent(PositionCompontent.class);
-            System.out.println(compontent.getPosition());
-        });
-    }
-
     /**
      * 移动操作
      * @param entity
      */
     private void move(IEntity entity){
-        MoveCompontent moveCompontent = entity.getCompontent(MoveCompontent.class);
-
-        if (moveCompontent.isHaveMoveTime()){
-            PositionCompontent position =  entity.getCompontent(PositionCompontent.class);
-            Position resultPostion = EngineUtils.getResultPostion(moveCompontent.getVector(),position.getPosition(),moveCompontent.getMoveSpeed());
+        MoveComponent moveComponent = entity.getCompontent(MoveComponent.class);
+        if (moveComponent.isHaveMoveTime()){
+            PositionComponent position =  entity.getCompontent(PositionComponent.class);
+            Position resultPostion = EngineUtils.getResultPostion(moveComponent.getVector(),position.getPosition(), moveComponent.getMoveSpeed());
             position.setPosition(resultPostion);
-            moveCompontent.reduceAnimaTime();
+            moveComponent.reduceAnimaTime();
         }
-
     }
+
+
+
+
 
 
 

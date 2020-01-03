@@ -8,11 +8,11 @@ import com.zhenai.ecsgame.framwork.entity.IEntity;
  * @Date: 2019/12/30/16:26
  * @Description:
  */
-public abstract class AbstractCompontent implements ICompontent {
+public abstract class AbstractComponent implements IComponent {
 
     private IEntity entity;
 
-    public AbstractCompontent(IEntity entity) {
+    public AbstractComponent(IEntity entity) {
         this.entity = entity;
     }
 

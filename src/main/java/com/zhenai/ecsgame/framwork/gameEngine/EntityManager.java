@@ -1,6 +1,6 @@
 package com.zhenai.ecsgame.framwork.gameEngine;
 
-import com.zhenai.ecsgame.framwork.component.ICompontent;
+import com.zhenai.ecsgame.framwork.component.IComponent;
 import com.zhenai.ecsgame.framwork.entity.IEntity;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
@@ -33,7 +33,7 @@ public class EntityManager implements IEntityManager {
 
 
     @Override
-    public Collection<IEntity> getFilterEntity(Collection<Class<? extends ICompontent>> clzs) {
+    public Collection<IEntity> getFilterEntity(Collection<Class<? extends IComponent>> clzs) {
         if (clzs == null || clzs.size() == 0) {
             return new ArrayList<>(entities);
         }

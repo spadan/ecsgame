@@ -1,6 +1,6 @@
-package com.zhenai.ecsgame.compontent;
+package com.zhenai.ecsgame.component;
 
-import com.zhenai.ecsgame.framwork.component.AbstractCompontent;
+import com.zhenai.ecsgame.framwork.component.AbstractComponent;
 import com.zhenai.ecsgame.framwork.entity.IEntity;
 import com.zhenai.ecsgame.framwork.gameEngine.bean.Vector2D;
 
@@ -9,7 +9,7 @@ import com.zhenai.ecsgame.framwork.gameEngine.bean.Vector2D;
  * @Date: 2019/12/31/11:23
  * @Description:
  */
-public class MoveCompontent extends AbstractCompontent {
+public class MoveComponent extends AbstractComponent {
 
     /**
      * 移动剩余时间，单位：帧
@@ -27,14 +27,14 @@ public class MoveCompontent extends AbstractCompontent {
     private double moveSpeed;
 
 
-    public MoveCompontent(IEntity compontent) {
+    public MoveComponent(IEntity compontent) {
         super(compontent);
         this.animationTime = 0;
         this.vector = new Vector2D();
         this.moveSpeed = 0;
     }
 
-    public MoveCompontent(IEntity entity, int animationTime, Vector2D vector, double moveSpeed) {
+    public MoveComponent(IEntity entity, int animationTime, Vector2D vector, double moveSpeed) {
         super(entity);
         this.animationTime = animationTime;
         this.vector = vector;

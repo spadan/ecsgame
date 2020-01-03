@@ -1,11 +1,10 @@
 package com.zhenai.ecsgame.framwork.system;
 
-import com.zhenai.ecsgame.framwork.component.ICompontent;
+import com.zhenai.ecsgame.framwork.component.IComponent;
 import com.zhenai.ecsgame.framwork.entity.IEntity;
 import com.zhenai.ecsgame.framwork.gameEngine.EntityManager;
 import com.zhenai.ecsgame.framwork.gameEngine.GameDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 
 import javax.annotation.PostConstruct;
 import java.util.*;
@@ -34,11 +33,11 @@ public abstract class AbstractSystemImpl implements ISystem {
         gameDriver.addObj(this);
     }
 
-    public abstract Collection<Class<? extends ICompontent>> interestCompontent();
+    public abstract Collection<Class<? extends IComponent>> interestCompontent();
 
     @Override
     public Collection<? extends IEntity> getEntities(){
-        Collection<Class<? extends ICompontent>> compontentClzs =  interestCompontent();
+        Collection<Class<? extends IComponent>> compontentClzs =  interestCompontent();
         if (compontentClzs!=null&& compontentClzs.size()>0){
             return entityManager.getFilterEntity(compontentClzs);
         }else {

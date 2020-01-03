@@ -1,7 +1,8 @@
 package com.zhenai.ecsgame.entity;
 
-import com.zhenai.ecsgame.compontent.MoveCompontent;
-import com.zhenai.ecsgame.compontent.PositionCompontent;
+import com.zhenai.ecsgame.component.MoveComponent;
+import com.zhenai.ecsgame.component.PositionComponent;
+import com.zhenai.ecsgame.component.UserInfoComponent;
 import com.zhenai.ecsgame.framwork.entity.AbstractEntity;
 import com.zhenai.ecsgame.framwork.gameEngine.bean.Vector2D;
 
@@ -14,22 +15,26 @@ public class RobotEntity extends AbstractEntity {
 
     public RobotEntity(){
         super();
-        MoveCompontent moveCompontent = new MoveCompontent(this,100,new Vector2D(1,1),1.0d);
-        addCompontent(moveCompontent).addCompontent(new PositionCompontent(this));
+        UserInfoComponent uc= new UserInfoComponent(this,
+                "robot"+this.getEntityID().hashCode()%1000
+                ,this.getEntityID().toString()
+                ,UserInfoComponent.UserType.Robot);
+
+        MoveComponent mc = new MoveComponent(this,100,Vector2D.getRandomVector(),1.0d);
+        addCompontent(mc).addCompontent(uc).addCompontent(new PositionComponent(this));
+
     }
 
     public void setSpeed(double speed){
-        getCompontent(MoveCompontent.class).setMoveSpeed(speed);
+        getCompontent(MoveComponent.class).setMoveSpeed(speed);
     }
 
     public void setVector(Vector2D v){
-        getCompontent(MoveCompontent.class).setVector(v);
+        getCompontent(MoveComponent.class).setVector(v);
     }
 
     public void setAnimationTime(int time){
-        getCompontent(MoveCompontent.class).setAnimationTime(time);
+        getCompontent(MoveComponent.class).setAnimationTime(time);
     }
-
-
 
 }

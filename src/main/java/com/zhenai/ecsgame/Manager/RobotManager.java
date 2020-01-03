@@ -1,7 +1,8 @@
 package com.zhenai.ecsgame.Manager;
 
-import com.zhenai.ecsgame.compontent.MoveCompontent;
-import com.zhenai.ecsgame.compontent.PositionCompontent;
+import com.zhenai.ecsgame.component.MoveComponent;
+import com.zhenai.ecsgame.component.PositionComponent;
+import com.zhenai.ecsgame.component.UserInfoComponent;
 import com.zhenai.ecsgame.entity.RobotEntity;
 import com.zhenai.ecsgame.framwork.gameEngine.AbstractGameObject;
 import com.zhenai.ecsgame.framwork.gameEngine.bean.Vector2D;
@@ -34,15 +35,15 @@ public class RobotManager extends AbstractGameObject {
         if (updateTime%100==0){
             printPosition(robotEntities);
         }
-
     }
+
 
     /**
      * 增加机器人移动时间
      */
     private void addRobotAnimationTime(){
         robotEntities.forEach(e->{
-            MoveCompontent compontent = e.getCompontent(MoveCompontent.class);
+            MoveComponent compontent = e.getCompontent(MoveComponent.class);
             if (compontent.getAnimationTime()==0){
                 compontent.addAnimationTime(100);
             }
@@ -63,11 +64,11 @@ public class RobotManager extends AbstractGameObject {
 
     private void printPosition(Collection<RobotEntity> collections){
         collections.forEach(e-> {
-            PositionCompontent compontent =  e.getCompontent(PositionCompontent.class);
-            if (compontent!=null){
-                System.out.print(compontent.getPosition()+":::::");
+            PositionComponent pc =  e.getCompontent(PositionComponent.class);
+            UserInfoComponent uc =  e.getCompontent(UserInfoComponent.class);
+            if (pc!=null&&uc!=null){
+                System.out.print("id:"+uc.getUserName()+"{"+pc.getPosition()+"},");
             }
-
         });
         System.out.println();
     }

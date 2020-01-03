@@ -1,7 +1,7 @@
-package com.zhenai.ecsgame.compontent;
+package com.zhenai.ecsgame.component;
 
 import com.zhenai.ecsgame.framwork.entity.IEntity;
-import com.zhenai.ecsgame.framwork.component.AbstractCompontent;
+import com.zhenai.ecsgame.framwork.component.AbstractComponent;
 import com.zhenai.ecsgame.framwork.gameEngine.bean.Position;
 
 /**
@@ -9,17 +9,17 @@ import com.zhenai.ecsgame.framwork.gameEngine.bean.Position;
  * @Date: 2019/12/30/15:57
  * @Description:游戏对象位置模块
  */
-public class PositionCompontent extends AbstractCompontent {
+public class PositionComponent extends AbstractComponent {
 
     private Position position;
 
 
-    public PositionCompontent(IEntity compontent) {
+    public PositionComponent(IEntity compontent) {
         super(compontent);
         position = new Position();
     }
 
-    public PositionCompontent(IEntity entity, double x, double y) {
+    public PositionComponent(IEntity entity, double x, double y) {
         super(entity);
         position = new Position(x,y);
     }

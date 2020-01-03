@@ -1,30 +1,36 @@
 package com.zhenai.ecsgame.framwork.entity;
 
-import com.zhenai.ecsgame.framwork.component.ICompontent;
+import com.zhenai.ecsgame.framwork.component.IComponent;
 
 import java.util.Collection;
+import java.util.UUID;
+
 
 public interface IEntity {
-
-
 
     /**
      * 获取Compontent 组件
      * @param clz
      * @return
      */
-    <T extends ICompontent> T getCompontent(Class<T> clz);
+    <T extends IComponent> T getCompontent(Class<T> clz);
 
-    ICompontent getCompontent(String clzName);
+    IComponent getCompontent(String clzName);
 
-    <T extends ICompontent> IEntity addCompontent(T t);
+    <T extends IComponent> IEntity addCompontent(T t);
 
-    void removeCompontent(Class<? extends ICompontent> clz);
+    void removeCompontent(Class<? extends IComponent> clz);
 
     void clearAllCompontents();
 
-    boolean isContainCompontents(Collection<Class<? extends ICompontent>>clzs);
+    boolean isContainCompontents(Collection<Class<? extends IComponent>>clzs);
 
     void destroy();
+
+    /**
+     * 获取id
+     * @return
+     */
+    UUID getEntityID();
 
 }

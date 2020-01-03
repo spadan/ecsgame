@@ -1,9 +1,7 @@
 package com.zhenai.ecsgame.framwork.gameEngine.util;
 
-import com.zhenai.ecsgame.compontent.PositionCompontent;
 import com.zhenai.ecsgame.framwork.gameEngine.bean.Position;
 import com.zhenai.ecsgame.framwork.gameEngine.bean.Vector2D;
-import sun.security.util.Length;
 
 /**
  * @Auther: haitong.zhang
