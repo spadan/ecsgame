@@ -13,7 +13,7 @@ public interface IGameObject {
     /**
      * 游戏驱动
      */
-    void GameUpdate ();
+    void gameUpdate();
 
 
     /**

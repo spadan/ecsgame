@@ -33,11 +33,11 @@ public abstract class AbstractSystemImpl implements ISystem {
         gameDriver.addObj(this);
     }
 
-    public abstract Collection<Class<? extends IComponent>> interestCompontent();
+    public abstract Collection<Class<? extends IComponent>> interestComponent();
 
     @Override
     public Collection<? extends IEntity> getEntities(){
-        Collection<Class<? extends IComponent>> compontentClzs =  interestCompontent();
+        Collection<Class<? extends IComponent>> compontentClzs =  interestComponent();
         if (compontentClzs!=null&& compontentClzs.size()>0){
             return entityManager.getFilterEntity(compontentClzs);
         }else {
@@ -46,7 +46,7 @@ public abstract class AbstractSystemImpl implements ISystem {
     }
 
     @Override
-    public abstract void GameUpdate();
+    public abstract void gameUpdate();
 
 
 

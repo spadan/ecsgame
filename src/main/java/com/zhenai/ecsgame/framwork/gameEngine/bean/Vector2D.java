@@ -21,9 +21,9 @@ public class Vector2D {
         normalize();
     }
 
-    public Vector2D(double _x, double _y) {
-        x = _x;
-        y = _y;
+    public Vector2D(double x, double y) {
+        this.x = x;
+        this.y = y;
         normalize();
     }
 
@@ -49,31 +49,27 @@ public class Vector2D {
     }
 
     //向量的标准化（方向不变，长度为1）
-    public Vector2D normalize()
-    {
+    public Vector2D normalize() {
         double length = getLength();
         x = x / length;
         y = y / length;
         return this;
     }
 
-    public double getLength()
-    {
+    public double getLength() {
         return Math.sqrt(getLengthSQ());
     }
 
-    public double getLengthSQ()
-    {
+    public double getLengthSQ() {
         return x * x + y * y;
     }
 
-    public boolean isZero()
-    {
+    public boolean isZero() {
         return x == 0 && y == 0;
     }
 
-    public static Vector2D getRandomVector(){
-        return new Vector2D(random.nextDouble(),random.nextDouble());
+    public static Vector2D getRandomVector() {
+        return new Vector2D(random.nextDouble(), random.nextDouble());
     }
 
     @Override

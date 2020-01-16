@@ -14,12 +14,12 @@ public class PositionComponent extends AbstractComponent {
     private Position position;
 
 
-    public PositionComponent(IEntity compontent) {
-        super(compontent);
+    public PositionComponent(IEntity entity) {
+        super(entity);
         position = new Position();
     }
 
-    public PositionComponent(IEntity entity, double x, double y) {
+    public PositionComponent(IEntity entity, int x, int y) {
         super(entity);
         position = new Position(x,y);
     }

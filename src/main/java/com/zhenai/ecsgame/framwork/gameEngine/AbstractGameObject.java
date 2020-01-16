@@ -1,11 +1,7 @@
 package com.zhenai.ecsgame.framwork.gameEngine;
 
 
-import com.zhenai.ecsgame.ApplicationListenerCompontent;
 import com.zhenai.ecsgame.framwork.gameEngine.util.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.annotation.PostConstruct;
 
 /**
  * @Auther: haitong.zhang
@@ -26,7 +22,7 @@ public abstract class AbstractGameObject implements IGameObject {
 
 
     @Override
-    public void GameUpdate() {
+    public void gameUpdate() {
 
     }
 

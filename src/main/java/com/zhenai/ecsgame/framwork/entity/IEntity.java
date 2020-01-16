@@ -2,6 +2,7 @@ package com.zhenai.ecsgame.framwork.entity;
 
 import com.zhenai.ecsgame.framwork.component.IComponent;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.UUID;
 
@@ -13,11 +14,11 @@ public interface IEntity {
      * @param clz
      * @return
      */
-    <T extends IComponent> T getCompontent(Class<T> clz);
+    <T extends IComponent> T getComponent(Class<T> clz);
 
-    IComponent getCompontent(String clzName);
+    IComponent getComponent(String clzName);
 
-    <T extends IComponent> IEntity addCompontent(T t);
+    <T extends IComponent> IEntity addComponent(T t);
 
     void removeCompontent(Class<? extends IComponent> clz);
 
@@ -32,5 +33,7 @@ public interface IEntity {
      * @return
      */
     UUID getEntityID();
+
+    LocalDateTime getCreateTime();
 
 }

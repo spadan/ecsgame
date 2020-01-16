@@ -2,7 +2,7 @@ package com.zhenai.ecsgame.component;
 
 import com.zhenai.ecsgame.framwork.component.AbstractComponent;
 import com.zhenai.ecsgame.framwork.entity.IEntity;
-import com.zhenai.ecsgame.framwork.gameEngine.bean.Vector2D;
+import com.zhenai.ecsgame.framwork.gameEngine.bean.Direction;
 
 /**
  * @Auther: haitong.zhang
@@ -19,25 +19,17 @@ public class MoveComponent extends AbstractComponent {
     /**
      * 移动方向
      */
-    private Vector2D vector;
+    private Direction direction;
 
     /**
      * 移动速度 = length/每帧time
      */
-    private double moveSpeed;
+    private int moveSpeed;
 
-
-    public MoveComponent(IEntity compontent) {
-        super(compontent);
-        this.animationTime = 0;
-        this.vector = new Vector2D();
-        this.moveSpeed = 0;
-    }
-
-    public MoveComponent(IEntity entity, int animationTime, Vector2D vector, double moveSpeed) {
+    public MoveComponent(IEntity entity, int animationTime, Direction vector, int moveSpeed) {
         super(entity);
         this.animationTime = animationTime;
-        this.vector = vector;
+        this.direction = vector;
         this.moveSpeed = moveSpeed;
     }
 
@@ -49,35 +41,35 @@ public class MoveComponent extends AbstractComponent {
         this.animationTime = animationTime;
     }
 
-    public void addAnimationTime(int time){
-        this.animationTime = this.animationTime+time;
+    public void addAnimationTime(int time) {
+        this.animationTime = this.animationTime + time;
     }
 
-    public void reduceAnimaTime(){
+    public void reduceAnimaTime() {
         this.animationTime--;
     }
 
-    public boolean isHaveMoveTime(){
-        if (animationTime<=0){
+    public boolean isHaveMoveTime() {
+        if (animationTime <= 0) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }
 
-    public Vector2D getVector() {
-        return vector;
+    public Direction getDirection() {
+        return direction;
     }
 
-    public void setVector(Vector2D vector) {
-        this.vector = vector;
+    public void setDirection(Direction direction) {
+        this.direction = direction;
     }
 
-    public double getMoveSpeed() {
+    public int getMoveSpeed() {
         return moveSpeed;
     }
 
-    public void setMoveSpeed(double moveSpeed) {
+    public void setMoveSpeed(int moveSpeed) {
         this.moveSpeed = moveSpeed;
     }
 }
