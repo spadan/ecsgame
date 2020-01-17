@@ -1,7 +1,7 @@
 package com.zhenai.ecsgame.system;
 
+import com.zhenai.ecsgame.component.ImageComponent;
 import com.zhenai.ecsgame.component.PositionComponent;
-import com.zhenai.ecsgame.component.ShapeComponent;
 import com.zhenai.ecsgame.framwork.component.IComponent;
 import com.zhenai.ecsgame.framwork.entity.IEntity;
 import com.zhenai.ecsgame.framwork.gameEngine.GameBoard;
@@ -22,7 +22,7 @@ import java.util.Collection;
 
 @Component
 @DependsOn(value = "entityManager")
-public class GameBoardRefreshSystem extends AbstractSystemImpl {
+public class GameBoardRefreshSystem extends AbstractSystemImpl{
 
     private GameBoard gameBoard;
 
@@ -41,7 +41,7 @@ public class GameBoardRefreshSystem extends AbstractSystemImpl {
 
     @Override
     public Collection<Class<? extends IComponent>> interestComponent() {
-        return Arrays.asList(PositionComponent.class, ShapeComponent.class);
+        return Arrays.asList(PositionComponent.class, ImageComponent.class);
     }
 
 }

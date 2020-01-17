@@ -2,7 +2,7 @@ package com.zhenai.ecsgame.system;
 
 import com.zhenai.ecsgame.component.MoveComponent;
 import com.zhenai.ecsgame.component.PositionComponent;
-import com.zhenai.ecsgame.component.ShapeComponent;
+import com.zhenai.ecsgame.component.ImageComponent;
 import com.zhenai.ecsgame.component.PlayerComponent;
 import com.zhenai.ecsgame.framwork.component.IComponent;
 import com.zhenai.ecsgame.framwork.entity.IEntity;
@@ -71,7 +71,7 @@ public class MoveSystem extends AbstractSystemImpl {
     private boolean shouldStop(IEntity entity, Position position) {
         PlayerComponent userComponent = entity.getComponent(PlayerComponent.class);
         if (userComponent != null) {
-            ShapeComponent shapeComponent = entity.getComponent(ShapeComponent.class);
+            ImageComponent shapeComponent = entity.getComponent(ImageComponent.class);
             if (shapeComponent != null) {
                 Size size = shapeComponent.getSize();
                 if (EngineUtils.isOutbound(position, size)) {

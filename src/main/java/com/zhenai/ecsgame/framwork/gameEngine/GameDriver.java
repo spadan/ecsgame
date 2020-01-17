@@ -16,23 +16,30 @@ import java.util.concurrent.Executors;
 @Component
 public class GameDriver implements IGameDriver, ApplicationRunner {
 
+    private volatile boolean isPause = false;
+
     private List<IGameObject> gameObjects = new CopyOnWriteArrayList<>();
 
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        ExecutorService gameCoreThread = Executors.newSingleThreadExecutor();
+        ExecutorService gameCoreThread = Executors.newSingleThreadExecutor(r -> new Thread(r, "game core thread"));
         gameCoreThread.execute(() -> {
             while (true) {
+                while (isPause) {
+
+                }
                 try {
                     Thread.sleep(1000 / Constant.FRAME_SPEED);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 removeObj();
+                long start = System.nanoTime();
                 for (IGameObject gameObject : gameObjects) {
                     gameObject.gameUpdate();
                 }
+                System.out.println("cost time:" + (System.nanoTime() - start));
             }
         });
     }
@@ -58,5 +65,8 @@ public class GameDriver implements IGameDriver, ApplicationRunner {
         gameObjects.removeIf(removeSet::contains);
     }
 
+    public void setPause(boolean isPause) {
+        this.isPause = isPause;
+    }
 
 }

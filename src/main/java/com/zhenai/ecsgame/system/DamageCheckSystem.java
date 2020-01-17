@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 import com.zhenai.ecsgame.component.*;
 import com.zhenai.ecsgame.framwork.component.IComponent;
 import com.zhenai.ecsgame.framwork.entity.IEntity;
+import com.zhenai.ecsgame.framwork.gameEngine.bean.BelongTo;
 import com.zhenai.ecsgame.framwork.gameEngine.bean.Position;
 import com.zhenai.ecsgame.framwork.gameEngine.bean.Size;
 import com.zhenai.ecsgame.framwork.gameEngine.util.EngineUtils;
@@ -34,7 +35,7 @@ public class DamageCheckSystem extends AbstractSystemImpl {
         return Arrays.asList(DamageComponent.class,
                 HealthComponent.class,
                 PositionComponent.class,
-                ShapeComponent.class,
+                ImageComponent.class,
                 BelongToComponent.class);
     }
 
@@ -44,13 +45,13 @@ public class DamageCheckSystem extends AbstractSystemImpl {
      */
     private void checkHit() {
         Collection<? extends IEntity> entities = getEntities();
-        Map<Integer, ? extends List<? extends IEntity>> groupMap;
+        Map<BelongTo, ? extends List<? extends IEntity>> groupMap;
         groupMap = entities.stream()
                            .filter(e -> !e.isContainCompontents(Collections.singletonList(ToCleanComponent.class)))
                            .collect(Collectors.groupingBy(e -> e.getComponent(BelongToComponent.class).getBelongTo()));
 
-        List<? extends IEntity> players = groupMap.get(BelongToComponent.PLAYER);
-        List<? extends IEntity> enemies = groupMap.get(BelongToComponent.ENEMY);
+        List<? extends IEntity> players = groupMap.get(BelongTo.PLAYER);
+        List<? extends IEntity> enemies = groupMap.get(BelongTo.ENEMY);
         if (players == null || enemies == null) {
             return;
         }
@@ -64,13 +65,12 @@ public class DamageCheckSystem extends AbstractSystemImpl {
                     continue;
                 }
                 Position position1 = entity1.getComponent(PositionComponent.class).getPosition();
-                Size size1 = entity1.getComponent(ShapeComponent.class).getSize();
+                Size size1 = entity1.getComponent(ImageComponent.class).getSize();
                 Position position2 = entity2.getComponent(PositionComponent.class).getPosition();
-                Size size2 = entity2.getComponent(ShapeComponent.class).getSize();
+                Size size2 = entity2.getComponent(ImageComponent.class).getSize();
                 if (EngineUtils.isCollisionWithRect(position1, size1, position2, size2)) {
                     collision.add(entity1);
                     collision.add(entity2);
-                    System.out.println("hit...");
                     calDamage(entity1, entity2);
                     calDamage(entity2, entity1);
                 }
@@ -86,8 +86,12 @@ public class DamageCheckSystem extends AbstractSystemImpl {
         int resultHp = Math.max(hp1 - damage2, 0);
         health1.setHp(resultHp);
         if (resultHp <= 0) {
-            System.out.println("hit down:" + entity1.toString());
-            entity1.addComponent(new ToCleanComponent(entity1, 15));
+            if (entity1.isContainComponent(PlaneComponent.class) || entity1.isContainComponent(BigPlaneComponent.class)) {
+                // 飞机被击毁后，延迟10帧再销毁，留出时间展示被击毁形象
+                entity1.addComponent(new ToCleanComponent(entity1, 10));
+            } else if (entity1.isContainComponent(BulletComponent.class)) {
+                entity1.destroy();
+            }
         }
     }
 

@@ -95,6 +95,11 @@ public abstract class AbstractEntity implements IEntity {
     }
 
     @Override
+    public boolean isContainComponent(Class<? extends IComponent> clz) {
+        return clz != null && compontentMap.containsKey(clz.getName());
+    }
+
+    @Override
     public LocalDateTime getCreateTime() {
         return createTime;
     }

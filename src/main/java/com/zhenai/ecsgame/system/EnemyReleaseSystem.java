@@ -1,7 +1,7 @@
 package com.zhenai.ecsgame.system;
 
-import com.zhenai.ecsgame.entity.BigEnemyEntity;
-import com.zhenai.ecsgame.entity.EnemyEntity;
+import com.zhenai.ecsgame.entity.BigPlaneEntity;
+import com.zhenai.ecsgame.entity.PlaneEntity;
 import com.zhenai.ecsgame.framwork.component.IComponent;
 import com.zhenai.ecsgame.framwork.system.AbstractSystemImpl;
 import org.apache.commons.lang3.RandomUtils;
@@ -39,13 +39,13 @@ public class EnemyReleaseSystem extends AbstractSystemImpl {
      * 添加新的机器人
      */
     private void addNewRobot() {
-        // 固定每60帧生成一个敌机，同时每帧都有1%的概率产生一个敌机
+        // 固定每60帧生成一个敌机，同时每帧都有2%的概率产生一个敌机
         int frames = 60;
         if (updateTimes % frames == 0 || RandomUtils.nextInt(0, 100) % 50 == 0) {
             if (RandomUtils.nextInt(0, 10) <= 2) {
-                new BigEnemyEntity();
+                new BigPlaneEntity();
             } else {
-                new EnemyEntity();
+                new PlaneEntity();
             }
         }
     }

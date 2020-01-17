@@ -11,8 +11,8 @@ public interface Constant {
     /**
      * 游戏面板大小
      */
-    int BOARD_WIDTH = 600;
-    int BOARD_HEIGHT = 800;
+    int BOARD_WIDTH = 400;
+    int BOARD_HEIGHT = 700;
     /**
      * 敌机大小
      */

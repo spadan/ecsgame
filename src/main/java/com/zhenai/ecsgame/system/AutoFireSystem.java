@@ -5,6 +5,7 @@ import com.zhenai.ecsgame.entity.BulletEntity;
 import com.zhenai.ecsgame.framwork.component.IComponent;
 import com.zhenai.ecsgame.framwork.constant.Constant;
 import com.zhenai.ecsgame.framwork.entity.IEntity;
+import com.zhenai.ecsgame.framwork.gameEngine.bean.BelongTo;
 import com.zhenai.ecsgame.framwork.gameEngine.bean.Direction;
 import com.zhenai.ecsgame.framwork.gameEngine.bean.Position;
 import com.zhenai.ecsgame.framwork.gameEngine.bean.Size;
@@ -36,7 +37,7 @@ public class AutoFireSystem extends AbstractSystemImpl {
     @Override
     public Collection<Class<? extends IComponent>> interestComponent() {
         return Arrays.asList(PositionComponent.class,
-                ShapeComponent.class,
+                ImageComponent.class,
                 BelongToComponent.class,
                 AutoFireComponent.class);
     }
@@ -53,15 +54,15 @@ public class AutoFireSystem extends AbstractSystemImpl {
             if (updateTimes % frames == 0) {
                 Direction direction = fireComponent.getDirection();
                 Position position = entity.getComponent(PositionComponent.class).getPosition();
-                Size size = entity.getComponent(ShapeComponent.class).getSize();
+                Size size = entity.getComponent(ImageComponent.class).getSize();
                 int x, y;
                 switch (direction) {
                     case UP:
-                        x = position.getX() + ((size.getWidth() + Constant.BULLET_WIDTH) >> 2);
+                        x = position.getX() + ((size.getWidth() - Constant.BULLET_WIDTH) >> 1);
                         y = position.getY() - Constant.BULLET_HEIGHT;
                         break;
                     case DOWN:
-                        x = position.getX() + ((size.getWidth() + Constant.BULLET_WIDTH) >> 2);
+                        x = position.getX() + ((size.getWidth() - Constant.BULLET_WIDTH) >> 1);
                         y = position.getY() + Constant.BULLET_HEIGHT;
                         break;
                     default:
@@ -71,13 +72,13 @@ public class AutoFireSystem extends AbstractSystemImpl {
                 for (int i = 0; i < bullets; i++) {
                     BulletEntity bullet = new BulletEntity();
                     bullet.addComponent(new PositionComponent(bullet, x, y));
-                    bullet.addComponent(new MoveComponent(bullet, Integer.MAX_VALUE, direction, 2));
+                    bullet.addComponent(new MoveComponent(bullet, Integer.MAX_VALUE, direction, 3));
                     bullet.addComponent(new HealthComponent(bullet, 1));
                     bullet.addComponent(new DamageComponent(bullet, 1));
                     BelongToComponent belongToComponent = entity.getComponent(BelongToComponent.class);
-                    int belongTo = belongToComponent.getBelongTo();
+                    BelongTo belongTo = belongToComponent.getBelongTo();
                     bullet.addComponent(new BelongToComponent(bullet, belongTo));
-                    if (belongToComponent.isBelongToPlayer()) {
+                    if (belongTo == BelongTo.PLAYER) {
                         bullet.addComponent(new AccComponent(bullet, 20, 1));
                     }
                 }

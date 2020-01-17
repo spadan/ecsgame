@@ -16,38 +16,30 @@ public class BulletEntity extends AbstractEntity {
 
     public BulletEntity() {
         super();
-        ShapeComponent shape = new ShapeComponent(this, Constant.BULLET_WIDTH, Constant.BULLET_HEIGHT, bulletImageName);
-        addComponent(shape);
+        BulletComponent bullet = new BulletComponent(this);
+        ImageComponent shape = new ImageComponent(this, Constant.BULLET_WIDTH, Constant.BULLET_HEIGHT,
+                2, bulletImageName);
+        addComponent(shape).addComponent(bullet);
     }
 
     public BulletEntity(int startX, int startY) {
         super();
+        BulletComponent bullet = new BulletComponent(this);
         HealthComponent health = new HealthComponent(this, 1);
         DamageComponent damage = new DamageComponent(this, 1);
-        ShapeComponent shape = new ShapeComponent(this, Constant.BULLET_WIDTH, Constant.BULLET_HEIGHT, bulletImageName);
-        PositionComponent startPosition = new PositionComponent(this, startX, startY);
+        ImageComponent outline = new ImageComponent(this, Constant.BULLET_WIDTH, Constant.BULLET_HEIGHT,
+                2, bulletImageName);
+        PositionComponent bornPosition = new PositionComponent(this, startX, startY);
         MoveComponent move = new MoveComponent(this, Integer.MAX_VALUE,
                 Direction.UP, 3);
         AccComponent acc = new AccComponent(this, Constant.FRAME_SPEED, 2);
-        addComponent(shape)
+        addComponent(bullet)
+                .addComponent(outline)
                 .addComponent(health)
                 .addComponent(damage)
-                .addComponent(startPosition)
+                .addComponent(bornPosition)
                 .addComponent(move)
                 .addComponent(acc);
-    }
-
-
-    public void setSpeed(int speed) {
-        getComponent(MoveComponent.class).setMoveSpeed(speed);
-    }
-
-    public void setDirection(Direction v) {
-        getComponent(MoveComponent.class).setDirection(v);
-    }
-
-    public void setAnimationTime(int time) {
-        getComponent(MoveComponent.class).setAnimationTime(time);
     }
 
 }

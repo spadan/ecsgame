@@ -9,24 +9,30 @@ import com.zhenai.ecsgame.framwork.gameEngine.bean.Size;
  * @Date: 2020/01/03/10:51
  * @Description:形状信息模块
  */
-public class ShapeComponent extends AbstractComponent {
+public class ImageComponent extends AbstractComponent {
     private String imageName;
     private Size size;
+    /**
+     * 层级
+     */
+    private int layer;
 
 
-    public ShapeComponent(IEntity entity) {
+    public ImageComponent(IEntity entity) {
         super(entity);
     }
 
-    public ShapeComponent(IEntity entity, int width, int height) {
+    public ImageComponent(IEntity entity, int width, int height) {
         super(entity);
         this.size = new Size(width, height);
     }
 
-    public ShapeComponent(IEntity entity, int width, int height, String imageName) {
+    public ImageComponent(IEntity entity, int width, int height, int layer, String imageName) {
         super(entity);
         this.size = new Size(width, height);
+        this.layer = layer;
         this.imageName = imageName;
+
     }
 
     public Size getSize() {
@@ -43,5 +49,13 @@ public class ShapeComponent extends AbstractComponent {
 
     public void setSize(Size size) {
         this.size = size;
+    }
+
+    public int getLayer() {
+        return layer;
+    }
+
+    public void setLayer(int layer) {
+        this.layer = layer;
     }
 }

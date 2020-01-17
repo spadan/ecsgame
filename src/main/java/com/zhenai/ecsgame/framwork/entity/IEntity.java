@@ -26,6 +26,8 @@ public interface IEntity {
 
     boolean isContainCompontents(Collection<Class<? extends IComponent>>clzs);
 
+    boolean isContainComponent(Class<? extends IComponent> clz);
+
     void destroy();
 
     /**

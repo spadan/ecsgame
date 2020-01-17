@@ -8,9 +8,9 @@ import com.zhenai.ecsgame.framwork.entity.IEntity;
  * @Date: 2020/01/03/10:51
  * @Description:身份信息模块
  */
-public class BulletComponent extends AbstractComponent {
+public class BigPlaneComponent extends AbstractComponent {
 
-    public BulletComponent(IEntity entity) {
+    public BigPlaneComponent(IEntity entity) {
         super(entity);
     }
 
